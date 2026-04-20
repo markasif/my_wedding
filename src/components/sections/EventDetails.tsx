@@ -23,7 +23,7 @@ const events: EventItem[] = [
     type: "Nikkah Ceremony",
     venue: "Zubaida Park Auditorium",
     date: "May 16, 2026 — Friday",
-    time: "To Be Announced",
+    time: "10:00 AM",
     address: "Pathumoochi, Vengara, Kerala",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Zubaida+Park+Auditorium+Pathumoochi+Vengara+Kerala",
     icon: "🕌",
@@ -82,7 +82,7 @@ export function EventDetails() {
         />
 
         {/* ── Event Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 xl:gap-12">
           {events.map((ev, i) => (
             <motion.div
               key={i}
@@ -96,15 +96,16 @@ export function EventDetails() {
               <div className="absolute inset-2 bg-black/5 blur-2xl rounded-sm transform group-hover:translate-y-4 transition-transform duration-700" />
               
               {/* Card - Main Content Layer */}
-              <div className="relative h-full bg-white paper-texture border border-gold/15 p-5 md:p-6 lg:p-7 xl:p-8 flex flex-col items-center text-center rounded-sm transition-all duration-700 group-hover:-translate-y-2">
+              <div className="relative h-full bg-white paper-texture border border-gold/15 p-6 md:p-6 lg:p-7 xl:p-8 flex flex-col items-center text-center rounded-sm transition-all duration-700 group-hover:-translate-y-2">
                 
-                {/* Decorative Inner Frame */}
-                <div className="absolute inset-3 border border-gold/10 rounded-sm pointer-events-none" />
-                <div className="absolute inset-4 border-[0.5px] border-gold/5 rounded-sm pointer-events-none" />
+                {/* Decorative Inner Frame - Hidden on Mobile to reduce "line" clutter */}
+                <div className="hidden md:block absolute inset-3 border border-gold/10 rounded-sm pointer-events-none" />
+                <div className="hidden md:block absolute inset-4 border-[0.5px] border-gold/5 rounded-sm pointer-events-none" />
                 
                 {/* Day Marker & Title */}
                 <div className="mb-4 relative w-full">
-                  <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gold/10" />
+                  {/* Horizontal Line - Hidden on Mobile */}
+                  <div className="hidden md:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gold/10" />
                   <span className="relative z-10 font-script text-xl text-gold pb-1 bg-white px-3">
                     {ev.dayLabel}
                   </span>
@@ -116,7 +117,7 @@ export function EventDetails() {
                 </h3>
 
                 {/* Details List - Compact Standard Layout */}
-                <div className="flex flex-col gap-4 mb-6 w-full relative z-10">
+                <div className="flex flex-col gap-2 md:gap-4 mb-2 md:mb-6 w-full relative z-10">
                   
                   {/* Temporal Block */}
                   <div className="flex flex-col items-center">
