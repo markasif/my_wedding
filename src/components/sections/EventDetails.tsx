@@ -34,7 +34,7 @@ const events: EventItem[] = [
     type: "Night Program",
     venue: "Groom's Residence",
     date: "May 16, 2026 — Friday",
-    time: "Evening Onwards",
+    time: "7:00 PM - 10:30 PM",
     address: "Aliparambil House, Kuttaloor, Vengara",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Mohammed+Aliparambil+House&query_place_id=ChIJzacREABLpqMDUzwuSA50-S4",
     icon: "🌙",
@@ -71,7 +71,7 @@ export function EventDetails() {
       
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#b8860b]/5 to-transparent pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto px-4 md:px-8 lg:px-10 xl:px-12">
         
         <SectionHeader
           arabicTitle="احتفالات الزفاف"
@@ -82,7 +82,7 @@ export function EventDetails() {
         />
 
         {/* ── Event Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 xl:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-10 xl:gap-12">
           {events.map((ev, i) => (
             <motion.div
               key={i}
@@ -96,14 +96,14 @@ export function EventDetails() {
               <div className="absolute inset-2 bg-black/5 blur-2xl rounded-sm transform group-hover:translate-y-4 transition-transform duration-700" />
               
               {/* Card - Main Content Layer */}
-              <div className="relative h-full bg-white paper-texture border border-gold/15 p-6 md:p-6 lg:p-7 xl:p-8 flex flex-col items-center text-center rounded-sm transition-all duration-700 group-hover:-translate-y-2">
+              <div className="relative h-full bg-white paper-texture border border-gold/15 p-4 md:p-6 lg:p-7 xl:p-8 flex flex-col items-center text-center rounded-sm transition-all duration-700 group-hover:-translate-y-2">
                 
                 {/* Decorative Inner Frame - Hidden on Mobile to reduce "line" clutter */}
                 <div className="hidden md:block absolute inset-3 border border-gold/10 rounded-sm pointer-events-none" />
                 <div className="hidden md:block absolute inset-4 border-[0.5px] border-gold/5 rounded-sm pointer-events-none" />
                 
                 {/* Day Marker & Title */}
-                <div className="mb-4 relative w-full">
+                <div className="mb-2 md:mb-4 relative w-full">
                   {/* Horizontal Line - Hidden on Mobile */}
                   <div className="hidden md:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gold/10" />
                   <span className="relative z-10 font-script text-xl text-gold pb-1 bg-white px-3">
@@ -112,7 +112,7 @@ export function EventDetails() {
                 </div>
 
                 {/* Event Type */}
-                <h3 className="font-serif text-xl md:text-2xl font-bold text-burgundy mb-4 tracking-tight group-hover:gold-gradient-text transition-all duration-500">
+                <h3 className="font-serif text-xl md:text-2xl font-bold text-burgundy mb-2 md:mb-4 tracking-tight group-hover:gold-gradient-text transition-all duration-500">
                   {ev.type}
                 </h3>
 
@@ -124,14 +124,14 @@ export function EventDetails() {
                     <p className="font-serif text-dark-mid font-bold text-base md:text-lg leading-tight uppercase tracking-widest">
                       {ev.date}
                     </p>
-                    <div className="flex items-center gap-2 mt-1.5">
+                    <div className="flex items-center gap-2 mt-0.5 md:mt-1.5">
                        <span className="font-pinyon text-gold-muted text-base opacity-70 italic">at</span>
                        <span className="font-serif text-dark-mid font-semibold text-sm md:text-base opacity-90">{ev.time}</span>
                     </div>
                   </div>
 
                   {/* Ornate Divider */}
-                  <div className="flex items-center justify-center gap-3 py-1 opacity-50">
+                  <div className="flex items-center justify-center gap-3 py-0.5 md:py-1 opacity-50">
                      <div className="w-10 h-px bg-gradient-to-r from-transparent to-gold/30" />
                      <div className="text-gold text-xs">❦</div>
                      <div className="w-10 h-px bg-gradient-to-l from-transparent to-gold/40" />
@@ -139,13 +139,13 @@ export function EventDetails() {
 
                   {/* Spatial Block */}
                   <div className="flex flex-col items-center">
-                    <div className="flex flex-col items-center gap-0.5 mb-1.5">
+                    <div className="flex flex-col items-center gap-0.5 mb-1 md:mb-1.5">
                        <span className="font-pinyon text-gold-muted text-base opacity-70 italic">held at</span>
                        <p className="font-serif text-dark-mid font-bold text-base md:text-lg leading-tight uppercase tracking-tight">
                          {ev.venue}
                        </p>
                     </div>
-                    <p className="font-sans text-[9px] text-text-muted mt-1.5 tracking-[0.15em] leading-relaxed font-medium uppercase max-w-[200px] mx-auto opacity-70">
+                    <p className="font-sans text-[9px] text-text-muted mt-1 md:mt-1.5 tracking-[0.15em] leading-relaxed font-medium uppercase max-w-[200px] mx-auto opacity-70">
                       {ev.address}
                     </p>
                   </div>

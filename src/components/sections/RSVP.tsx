@@ -34,7 +34,7 @@ export function RSVP() {
         aria-hidden="true"
       />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto px-4 md:px-8 lg:px-10 xl:px-12">
 
         <SectionHeader
           arabicTitle="تأكيد الحضور"
@@ -77,10 +77,10 @@ export function RSVP() {
                 <div className="mt-6 w-16 h-px bg-gold/30 mx-auto" />
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6 md:gap-8">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-2 md:gap-8">
                 
                 {/* ── Grid Layout ── */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6">
                   
                   {/* Name Input - Full Width */}
                   <div className="flex flex-col gap-2 md:col-span-2">
@@ -153,7 +153,7 @@ export function RSVP() {
                   </div>
 
                   {/* Attendance Choice - Full Width */}
-                  <div className="flex flex-col gap-2.5 md:col-span-2">
+                  <div className="flex flex-col gap-1.5 md:gap-2.5 md:col-span-2">
                     <span className="font-serif text-[11px] md:text-xs font-bold text-burgundy tracking-widest uppercase opacity-80 mb-0.5">
                        Will you be joining us?
                     </span>
@@ -195,24 +195,7 @@ export function RSVP() {
                   </div>
                 </div>
 
-                {/* ── Message Area ── */}
-                <div className="flex flex-col gap-6">
-                  <div className="flex flex-col gap-2">
-                    <label
-                      htmlFor="rsvp-message"
-                      className="font-serif text-[11px] md:text-xs font-bold text-burgundy tracking-widest uppercase opacity-80"
-                    >
-                       Message for the Couple
-                    </label>
-                    <textarea
-                      id="rsvp-message"
-                      placeholder="Share your prayers & warm wishes..."
-                      rows={2}
-                      className="bg-cream/15 border border-gold/15 rounded-sm px-4 py-3 font-serif text-base text-dark-mid placeholder:text-text-muted/30 outline-none focus:border-gold focus:ring-4 focus:ring-gold/5 focus:bg-white transition-all duration-500 resize-none w-full shadow-sm"
-                    />
-                  </div>
-
-                  <div className="flex justify-center">
+                  <div className="flex justify-center mt-2 md:mt-4">
                     <motion.button
                       type="submit"
                       className="group relative inline-flex items-center gap-4 px-8 py-3 overflow-hidden rounded-sm bg-burgundy shadow-lg"
@@ -228,7 +211,7 @@ export function RSVP() {
                       </svg>
                     </motion.button>
                   </div>
-                </div>
+
 
               </form>
             )}

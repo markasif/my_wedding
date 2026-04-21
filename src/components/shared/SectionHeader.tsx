@@ -47,7 +47,7 @@ export function SectionHeader({
       </p>
 
       {mainTitle && (
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-[#6b2737] mb-2 tracking-tight uppercase">
+        <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl font-bold text-[#6b2737] mb-2 tracking-tight uppercase">
           {mainTitle}
         </h2>
       )}

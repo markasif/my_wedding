@@ -99,13 +99,13 @@ export function Hero() {
           initial={{ opacity: 0, y: 20, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
-          className="mb-8 md:mb-12"
+          className="mb-4 md:mb-12"
           style={{ willChange: "transform, opacity" }}
         >
           <div
             style={{
               fontFamily: "'Scheherazade New', 'Noto Naskh Arabic', serif",
-              fontSize: "clamp(2.5rem, 6vw, 3.8rem)",
+              fontSize: "clamp(1.6rem, 6vw, 3.8rem)",
               color: GOLD,
               textShadow: "0 0 40px rgba(212,175,55,0.7), 0 0 80px rgba(212,175,55,0.3)",
               direction: "rtl"
@@ -124,14 +124,14 @@ export function Hero() {
             style={{ willChange: "transform, opacity" }}
           >
             <h1 className="font-serif text-white flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10 leading-none tracking-tight">
-              <span className="gold-gradient-text" style={{ fontSize: "clamp(3.5rem, 10vw, 6.5rem)", fontWeight: 700 }}>
+              <span className="gold-gradient-text" style={{ fontSize: "clamp(2.8rem, 10vw, 6.5rem)", fontWeight: 700 }}>
                 Asif
               </span>
               <span className="font-pinyon italic text-[#d4af37] opacity-80" 
-                    style={{ fontSize: "clamp(2.5rem, 7vw, 4.5rem)", fontFamily: "var(--font-pinyon)" }}>
+                    style={{ fontSize: "clamp(1.8rem, 7vw, 4.5rem)", fontFamily: "var(--font-pinyon)" }}>
                 &amp;
               </span>
-              <span className="gold-gradient-text" style={{ fontSize: "clamp(3.5rem, 10vw, 6.5rem)", fontWeight: 700 }}>
+              <span className="gold-gradient-text" style={{ fontSize: "clamp(2.8rem, 10vw, 6.5rem)", fontWeight: 700 }}>
                 Hiba
               </span>
             </h1>
@@ -148,14 +148,14 @@ export function Hero() {
         >
           <div className="relative group">
             <div className="absolute inset-0 bg-gold blur-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
-            <div className="relative px-12 py-3 border-y border-[#d4af37]/40 bg-black/40 backdrop-blur-md">
-               <p className="font-sans text-[12px] md:text-[14px] tracking-[0.7em] uppercase text-[#d4af37] font-bold">
+            <div className="relative px-8 py-2 md:px-12 md:py-3 border-y border-[#d4af37]/40 bg-black/40 backdrop-blur-md">
+               <p className="font-sans text-[10px] md:text-[14px] tracking-[0.7em] uppercase text-[#d4af37] font-bold">
                  May 17, 2026 • Sunday
                </p>
             </div>
           </div>
           
-          <p className="font-serif italic text-white/90 text-xl md:text-2xl tracking-wide">
+          <p className="font-serif italic text-white/90 text-lg md:text-2xl tracking-wide">
             Zubaida Park Auditorium, Vengara
           </p>
         </motion.div>
@@ -169,11 +169,11 @@ export function Hero() {
         >
           <a
             href="#rsvp"
-            className="group relative inline-block px-14 py-4 overflow-hidden rounded-sm"
+            className="group relative inline-block px-10 py-3 md:px-14 md:py-4 overflow-hidden rounded-sm"
           >
             <div className="absolute inset-0 border-2 border-[#d4af37]/50" />
             <div className="absolute inset-0 bg-[#d4af37] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            <span className="relative z-10 text-[#d4af37] group-hover:text-black font-sans text-[12px] tracking-[0.5em] uppercase transition-colors duration-500 font-bold">
+            <span className="relative z-10 text-[#d4af37] group-hover:text-black font-sans text-[10px] md:text-[12px] tracking-[0.5em] uppercase transition-colors duration-500 font-bold">
               Confirm Attendance
             </span>
           </a>

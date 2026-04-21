@@ -72,7 +72,7 @@ export function Footer() {
         </div>
 
         {/* Footer row */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-6">
           <span className="font-sans text-[10px] tracking-[0.2em] text-text-muted/40 uppercase font-medium">
             © 2026 Mohammed Asif &amp; Hiba
           </span>
