@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useState, FormEvent, useRef } from "react";
+import { useState, FormEvent, useRef, useEffect } from "react";
 import { SectionHeader } from "../shared/SectionHeader";
 import { supabase } from "@/lib/supabase";
 import { AttendanceCounter } from "../shared/AttendanceCounter";
@@ -11,12 +11,21 @@ const GOLD = "#d4af37";
 
 export function RSVP() {
   const [submitted, setSubmitted] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [attending, setAttending] = useState("yes");
   const [guestSelection, setGuestSelection] = useState("1");
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  // On mount, check if user has already RSVP'd on this device
+  useEffect(() => {
+    const saved = localStorage.getItem("rsvp_submitted");
+    if (saved === "true") {
+      setSubmitted(true);
+    }
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,7 +34,20 @@ export function RSVP() {
 
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name") as string;
-    const phone = formData.get("phone") as string;
+    let phone = (formData.get("phone") as string).trim();
+
+    // ── Validation: Exactly 10 Digits ──
+    // Strip everything except numbers
+    const cleanPhone = phone.replace(/\D/g, '');
+    
+    if (cleanPhone.length !== 10) {
+      setError("Please enter a valid 10-digit mobile number.");
+      setLoading(false);
+      return;
+    }
+    
+    // Use the cleaned version (10 digits) for DB entry
+    phone = cleanPhone;
     
     let guests_count = 0;
     if (attending === "yes") {
@@ -36,23 +58,34 @@ export function RSVP() {
         guests_count = parseInt(guestSelection);
       }
     }
-
     try {
+      // 1. Check if they already submitted on this device (to show "Update" message)
+      const wasAlreadySubmitted = localStorage.getItem("rsvp_submitted") === "true";
+
+      // 2. Perform Upsert (Insert or Update if phone exists)
       const { error: submitError } = await supabase
         .from('rsvps')
-        .insert([
+        .upsert(
           { 
             name, 
             phone, 
             guests_count, 
             attending: attending === "yes" 
-          }
-        ]);
+          },
+          { onConflict: 'phone' }
+        );
 
       if (submitError) throw submitError;
+      
+      localStorage.setItem("rsvp_submitted", "true");
+      setIsUpdate(wasAlreadySubmitted);
       setSubmitted(true);
     } catch (err: any) {
-      console.error("Submission error:", err);
+      // Detailed logging for debugging
+      console.error("Submission error:", err?.message || err);
+      if (err?.details) console.error("Error details:", err.details);
+      if (err?.hint) console.error("Error hint:", err.hint);
+      
       setError("Failed to send response. Please try again.");
     } finally {
       setLoading(false);
@@ -115,11 +148,21 @@ export function RSVP() {
                   <span className="gold-gradient-text">🕊️</span>
                 </motion.div>
                 <h3 className="font-serif text-3xl md:text-4xl font-bold text-burgundy mb-4 tracking-tight">
-                  Blessings Received
+                  {isUpdate ? "Response Updated!" : "Blessings Received"}
                 </h3>
                 <p className="font-serif italic text-base text-text-muted leading-relaxed max-w-md mx-auto opacity-80">
-                  We have received your response and look forward to your presence.
+                  {isUpdate 
+                    ? "We've updated your attendance details. Thank you for keeping us informed!"
+                    : "We have received your response and look forward to your presence."}
                 </p>
+                <div className="mt-8 flex justify-center">
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="font-serif text-[10px] md:text-xs font-bold text-gold uppercase tracking-[0.2em] border-b border-gold/30 pb-1 hover:text-burgundy hover:border-burgundy transition-all duration-300"
+                  >
+                    Edit your response
+                  </button>
+                </div>
                 <div className="mt-6 w-16 h-px bg-gold/30 mx-auto" />
               </div>
             ) : (
@@ -158,7 +201,10 @@ export function RSVP() {
                       id="rsvp-phone"
                       name="phone"
                       type="tel"
-                      placeholder="Mobile No."
+                      placeholder="e.g. 9876543210"
+                      required
+                      pattern="[0-9]{10}"
+                      title="Please enter exactly 10 digits"
                       className="bg-cream/15 border border-gold/15 rounded-sm px-4 py-2.5 font-serif text-base text-dark-mid placeholder:text-text-muted/30 outline-none focus:border-gold focus:ring-4 focus:ring-gold/5 focus:bg-white transition-all duration-500 shadow-sm"
                     />
                   </div>
@@ -205,8 +251,8 @@ export function RSVP() {
                   </div>
 
                   {/* Custom Guest Count - Appears if 10+ selected */}
-                  <div className="md:col-span-2">
-                    {attending === "yes" && guestSelection === "10+" && (
+                  {attending === "yes" && guestSelection === "10+" && (
+                    <div className="md:col-span-2">
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
@@ -228,8 +274,8 @@ export function RSVP() {
                           className="bg-white border border-gold/40 rounded-sm px-4 py-2.5 font-serif text-base text-dark-mid outline-none focus:border-gold focus:ring-4 focus:ring-gold/5 transition-all duration-500 shadow-sm"
                         />
                       </motion.div>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {/* Attendance Choice - Full Width */}
                   <div className="flex flex-col gap-1.5 md:gap-2.5 md:col-span-2">
