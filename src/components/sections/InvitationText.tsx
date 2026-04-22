@@ -35,12 +35,17 @@ export function InvitationText() {
         "bottom-8 left-8 -rotate-90",
         "bottom-8 right-8 rotate-180"
       ].map((pos, i) => (
-        <div key={i} className={`absolute ${pos} text-[#d4af37]/30 pointer-events-none select-none hidden lg:block`}>
+        <div key={i} className={`absolute ${pos} text-[#d4af37]/30 pointer-events-none select-none hidden lg:block animate-float-slow`} style={{ animationDelay: `${i * 0.5}s` }}>
            <svg width="40" height="40" viewBox="0 0 100 100" fill="currentColor">
               <path d="M0,0 C20,0 40,20 40,40 C40,20 60,0 80,0 C60,0 40,-20 40,-40 C40,-20 20,0 0,0 Z" />
            </svg>
         </div>
       ))}
+
+      {/* Section Watermark */}
+      <div className="absolute top-[15%] left-1/2 -translate-x-1/2 font-script text-[140px] md:text-[220px] text-gold/[0.02] select-none pointer-events-none z-0 whitespace-nowrap">
+        Celebrating Love
+      </div>
 
       <div className="relative max-w-6xl mx-auto text-center px-10 xl:px-12">
         
@@ -68,7 +73,7 @@ export function InvitationText() {
         </motion.div>
 
         {/* 3. The Families Section (Symmetric Mirrors) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2 md:mb-4 lg:mb-6 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2 relative">
           
           {/* Elegant Center Divider */}
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent transform -translate-x-1/2" />
@@ -165,7 +170,7 @@ export function InvitationText() {
         </div>
 
         {/* 4. Secondary Information Area (Symmetric Grid) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2 md:mb-4 lg:mb-6 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2 relative">
           
           {/* Left: Digital Navigation (Below Groom) */}
           <motion.div

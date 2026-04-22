@@ -7,6 +7,7 @@ import { InvitationText } from "@/components/sections/InvitationText";
 import { EventDetails } from "@/components/sections/EventDetails";
 import { RSVP } from "@/components/sections/RSVP";
 import { Footer } from "@/components/sections/Footer";
+import { FloatingRSVP } from "@/components/shared/FloatingRSVP";
 
 const EnvelopeIntro = dynamic(
   () => import("@/components/sections/EnvelopeIntro").then((m) => ({ default: m.EnvelopeIntro })),
@@ -59,6 +60,8 @@ export default function Home() {
         <RSVP />
         <Footer />
       </div>
+
+      {siteRevealed && <FloatingRSVP />}
     </>
   );
 }

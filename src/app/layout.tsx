@@ -33,6 +33,10 @@ export const metadata: Metadata = {
     description: "The wedding of Mohammed Asif & Hiba — May 16 & 17, 2026 · Zubaida Park Auditorium, Vengara.",
     type: "website",
   },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

@@ -38,7 +38,7 @@ export function SectionHeader({
           marginBottom: "4px",
           direction: "rtl",
         }}
-        className={showTopMargin ? "mt-6" : ""}
+        className={`shimmer-gold ${showTopMargin ? "mt-6" : ""}`}
       >
         {arabicTitle}
       </div>
@@ -54,7 +54,7 @@ export function SectionHeader({
 
       <div className="flex items-center justify-center gap-4">
         <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#d4af37]/40" />
-        <span className="text-[#d4af37] text-lg">❦</span>
+        <span className="text-[#d4af37] text-lg animate-float-slow inline-block">❦</span>
         <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#d4af37]/40" />
       </div>
     </motion.div>

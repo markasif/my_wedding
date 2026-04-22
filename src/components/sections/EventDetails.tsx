@@ -15,31 +15,29 @@ interface EventItem {
   address: string;
   mapLink: string;
   icon: string;
-  dayLabel: string;
+  phaseLabel: string;
 }
 
 const events: EventItem[] = [
   {
     type: "Nikkah Ceremony",
     venue: "Zubaida Park Auditorium",
-    date: "May 16, 2026 — Friday",
+    date: "May 16, 2026 — Saturday",
     time: "10:00 AM",
     address: "Pathumoochi, Vengara, Kerala",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Zubaida+Park+Auditorium+Pathumoochi+Vengara+Kerala",
     icon: "🕌",
-    dayLabel: "Day 01",
-
+    phaseLabel: "The Ceremonies",
   },
   {
     type: "Night Program",
     venue: "Groom's Residence",
-    date: "May 16, 2026 — Friday",
+    date: "May 16, 2026 — Saturday",
     time: "7:00 PM - 10:30 PM",
     address: "Aliparambil House, Kuttaloor, Vengara",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Mohammed+Aliparambil+House&query_place_id=ChIJzacREABLpqMDUzwuSA50-S4",
     icon: "🌙",
-    dayLabel: "Day 01",
-
+    phaseLabel: "The Ceremonies",
   },
   {
     type: "Marriage Ceremony",
@@ -49,8 +47,7 @@ const events: EventItem[] = [
     address: "Pathumoochi, Vengara, Kerala",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Zubaida+Park+Auditorium+Pathumoochi+Vengara+Kerala",
     icon: "💍",
-    dayLabel: "Day 02",
-
+    phaseLabel: "The Wedding",
   },
 ];
 
@@ -66,10 +63,10 @@ export function EventDetails() {
     >
       {/* ── Background Patterns ── */}
       <div className="absolute inset-0 bg-[#fdfaf4]" />
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
-           style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/natural-paper.png')" }} />
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+           style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/royal-feather.png')" }} />
       
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#b8860b]/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#b8860b]/10 to-transparent pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-4 md:px-8 lg:px-10 xl:px-12">
         
@@ -80,6 +77,11 @@ export function EventDetails() {
           inView={inView}
           className="mb-2 md:mb-4 lg:mb-6"
         />
+
+        {/* Section Watermark */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-script text-[180px] md:text-[280px] text-gold/[0.02] select-none pointer-events-none z-0 whitespace-nowrap">
+          Ceremony
+        </div>
 
         {/* ── Event Grid ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-10 xl:gap-12">
@@ -96,19 +98,23 @@ export function EventDetails() {
               <div className="absolute inset-2 bg-black/5 blur-2xl rounded-sm transform group-hover:translate-y-4 transition-transform duration-700" />
               
               {/* Card - Main Content Layer */}
-              <div className="relative h-full bg-white paper-texture border border-gold/15 p-4 md:p-6 lg:p-7 xl:p-8 flex flex-col items-center text-center rounded-sm transition-all duration-700 group-hover:-translate-y-2">
+              <div className="relative h-full royal-card-bg royal-glass gold-rim-glow border border-gold/20 p-4 md:p-6 lg:p-7 xl:p-8 flex flex-col items-center text-center rounded-sm transition-all duration-700 group-hover:-translate-y-2 box-shadow-xl group-hover:shadow-gold/10">
+                
+                {/* Decorative Subtle Overlay */}
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/fancy-pants.png')]" />
                 
                 {/* Decorative Inner Frame - Hidden on Mobile to reduce "line" clutter */}
                 <div className="hidden md:block absolute inset-3 border border-gold/10 rounded-sm pointer-events-none" />
                 <div className="hidden md:block absolute inset-4 border-[0.5px] border-gold/5 rounded-sm pointer-events-none" />
                 
-                {/* Day Marker & Title */}
-                <div className="mb-2 md:mb-4 relative w-full">
-                  {/* Horizontal Line - Hidden on Mobile */}
-                  <div className="hidden md:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gold/10" />
-                  <span className="relative z-10 font-script text-xl text-gold pb-1 bg-white px-3">
-                    {ev.dayLabel}
-                  </span>
+                {/* ── Phase Marker (Seal Design) ── */}
+                <div className="mb-4 md:mb-6 relative flex flex-col items-center">
+                   <div className="absolute top-1/2 -translate-y-1/2 w-full h-px bg-gold/10 hidden md:block" />
+                   <div className="relative z-10 bg-white/80 royal-glass px-4 py-1 rounded-full border border-gold/30 shadow-sm">
+                      <span className="font-script text-base md:text-lg text-gold shimmer-gold block leading-none">
+                        {ev.phaseLabel}
+                      </span>
+                   </div>
                 </div>
 
                 {/* Event Type */}
@@ -166,10 +172,10 @@ export function EventDetails() {
                 </a>
               </div>
 
-              {/* Float Ornament (SVG instead of emoji) */}
-              <div className="absolute -top-3 -right-3 w-10 h-10 flex items-center justify-center text-gold/20 opacity-0 group-hover:opacity-100 transition-all duration-700 transform group-hover:rotate-12 group-hover:scale-125 pointer-events-none">
-                 <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
-                    <path d="M12,2C10.89,2 10,2.89 10,4C10,5.11 10.89,6 12,6C13.11,6 14,5.11 14,4C14,2.89 13.11,2 12,2M12,18C10.89,18 10,18.89 10,20C10,21.11 10.89,22 12,22C13.11,22 14,21.11 14,20C14,18.89 13.11,18 12,18M20,10C18.89,10 18,10.89 18,12C18,13.11 18.89,14 20,14C21.11,14 22,13.11 22,12C22,10.89 21.11,10 20,10M4,10C2.89,10 2,10.89 2,12C2,13.11 2.89,14 4,14C5.11,14 6,13.11 6,12C6,10.89 5.11,10 4,10Z" />
+              {/* Float Ornament (Upgraded from dots to Royal Flourish) */}
+              <div className="absolute -top-4 -right-4 w-12 h-12 flex items-center justify-center text-gold/30 opacity-0 group-hover:opacity-100 transition-all duration-700 transform group-hover:rotate-45 group-hover:scale-125 pointer-events-none animate-float-slow">
+                 <svg viewBox="0 0 100 100" fill="currentColor" width="40" height="40">
+                    <path d="M50,0 C55,30 70,45 100,50 C70,55 55,70 50,100 C45,70 30,55 0,50 C30,45 45,30 50,0 Z" />
                  </svg>
               </div>
             </motion.div>
@@ -180,8 +186,8 @@ export function EventDetails() {
       </div>
 
       {/* Background Side Elements */}
-      <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d4af37]/10 to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d4af37]/10 to-transparent" />
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d4af37]/15 to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d4af37]/15 to-transparent" />
     </section>
   );
 }

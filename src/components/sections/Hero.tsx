@@ -99,7 +99,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
-          className="mb-4 md:mb-12"
+          className="mb-4 md:mb-6"
           style={{ willChange: "transform, opacity" }}
         >
           <div
@@ -116,7 +116,12 @@ export function Hero() {
         </motion.div>
 
         {/* 2. Names (Clean & Elegant) */}
-        <div className="mb-10 md:mb-16 w-full px-4">
+        <div className="mb-4 md:mb-6 w-full px-4 relative">
+          {/* Typography Watermark */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-script text-[180px] md:text-[320px] text-gold/[0.03] select-none pointer-events-none z-[-1] whitespace-nowrap">
+            A & H
+          </div>
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -143,13 +148,13 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.7, ease: EASE_OUT }}
-          className="flex flex-col items-center gap-6 mb-10"
+          className="flex flex-col items-center gap-4 md:gap-6 mb-4 md:mb-6"
           style={{ willChange: "transform, opacity" }}
         >
           <div className="relative group">
             <div className="absolute inset-0 bg-gold blur-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
-            <div className="relative px-8 py-2 md:px-12 md:py-3 border-y border-[#d4af37]/40 bg-black/40 backdrop-blur-md">
-               <p className="font-sans text-[10px] md:text-[14px] tracking-[0.7em] uppercase text-[#d4af37] font-bold">
+            <div className="relative px-6 py-2 md:px-12 md:py-3 border-y border-[#d4af37]/40 bg-black/40 backdrop-blur-md">
+               <p className="font-sans text-[10px] md:text-[14px] tracking-[0.4em] md:tracking-[0.7em] uppercase text-[#d4af37] font-bold">
                  May 17, 2026 • Sunday
                </p>
             </div>
@@ -169,7 +174,7 @@ export function Hero() {
         >
           <a
             href="#rsvp"
-            className="group relative inline-block px-10 py-3 md:px-14 md:py-4 overflow-hidden rounded-sm"
+            className="group relative inline-block px-6 py-3 md:px-14 md:py-4 overflow-hidden rounded-sm shimmer-gold"
           >
             <div className="absolute inset-0 border-2 border-[#d4af37]/50" />
             <div className="absolute inset-0 bg-[#d4af37] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />

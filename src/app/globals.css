@@ -50,6 +50,22 @@
   background-color: var(--cream);
 }
 
+.royal-card-bg {
+  background-color: #fff;
+  background-image: url('https://www.transparenttextures.com/patterns/vintage-speckles.png');
+  position: relative;
+}
+
+.royal-card-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 2px 2px, var(--gold-muted) 1px, transparent 0);
+  background-size: 24px 24px;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
 .royal-shadow {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1);
 }
@@ -58,6 +74,66 @@
   font-family: serif;
   color: var(--gold);
   opacity: 0.6;
+}
+
+/* Luxury Shimmer Effect */
+.shimmer-gold {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-gold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: shimmer-sweep 6s infinite;
+}
+
+@keyframes shimmer-sweep {
+  0% { left: -150%; }
+  20%, 100% { left: 250%; }
+}
+
+/* Floating Animation */
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Royal Glass Interface */
+.royal-glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 
+    0 8px 32px 0 rgba(107, 39, 55, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.gold-rim-glow {
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-rim-glow:hover {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 
+    0 15px 45px rgba(107, 39, 55, 0.1),
+    0 0 15px rgba(212, 175, 55, 0.15);
 }
 
 /* ==========================================
