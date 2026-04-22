@@ -15,7 +15,8 @@ export function RSVP() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [attending, setAttending] = useState("yes");
-  const [guestSelection, setGuestSelection] = useState("1");
+  const [guestCount, setGuestCount] = useState(1);
+  const maxGuests = 15;
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -51,12 +52,7 @@ export function RSVP() {
     
     let guests_count = 0;
     if (attending === "yes") {
-      if (guestSelection === "10+") {
-        const customCount = formData.get("custom_guests") as string;
-        guests_count = customCount ? parseInt(customCount) : 10;
-      } else {
-        guests_count = parseInt(guestSelection);
-      }
+      guests_count = guestCount;
     }
     try {
       // 1. Check if they already submitted on this device (to show "Update" message)
@@ -218,64 +214,58 @@ export function RSVP() {
                         className="flex flex-col gap-2"
                       >
                         <label
-                          htmlFor="rsvp-guests"
                           className="font-serif text-[11px] md:text-xs font-bold text-burgundy tracking-widest uppercase opacity-80"
                         >
                           Guests Attending
                         </label>
-                        <div className="relative">
-                          <select
-                            id="rsvp-guests"
-                            name="guests"
-                            value={guestSelection}
-                            onChange={(e) => setGuestSelection(e.target.value)}
-                            className="w-full bg-cream/15 border border-gold/15 rounded-sm px-4 py-2.5 font-serif text-base text-dark-mid outline-none focus:border-gold focus:ring-4 focus:ring-gold/5 transition-all duration-500 cursor-pointer appearance-none shadow-sm"
+                        <div className="flex items-center gap-4 bg-cream/10 border border-gold/15 rounded-sm p-1.5 w-full justify-between shadow-sm">
+                          <button
+                            type="button"
+                            onClick={() => setGuestCount(prev => Math.max(1, prev - 1))}
+                            disabled={guestCount <= 1}
+                            className="w-10 h-10 flex items-center justify-center rounded-sm border border-gold/10 text-burgundy hover:bg-gold/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                            aria-label="Decrease guest count"
                           >
-                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                              <option key={n} value={n}>
-                                {n} {n > 1 ? "Guests" : "Guest"}
-                              </option>
-                            ))}
-                            <option value="10+">More than 10</option>
-                          </select>
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gold">
-                            <svg width="8" height="5" viewBox="0 0 12 8" fill="none">
-                              <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <svg width="12" height="2" viewBox="0 0 12 2" fill="none">
+                              <path d="M1 1h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                             </svg>
+                          </button>
+                          
+                          <div className="flex flex-col items-center flex-1">
+                            <span className="font-serif text-xl font-bold text-burgundy">
+                              {guestCount}
+                            </span>
+                            <span className="font-sans text-[8px] uppercase tracking-tighter text-gold font-bold">
+                              {guestCount === 1 ? 'Guest' : 'Guests'}
+                            </span>
                           </div>
+
+                          <button
+                            type="button"
+                            onClick={() => setGuestCount(prev => Math.min(maxGuests, prev + 1))}
+                            disabled={guestCount >= maxGuests}
+                            className="w-10 h-10 flex items-center justify-center rounded-sm border border-gold/10 text-burgundy hover:bg-gold/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                            aria-label="Increase guest count"
+                          >
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                              <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                            </svg>
+                          </button>
                         </div>
+                        {guestCount === maxGuests && (
+                          <motion.p 
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            className="text-[9px] text-gold/80 italic text-center mt-1"
+                          >
+                            For larger groups, please contact the host directly.
+                          </motion.p>
+                        )}
                       </motion.div>
                     ) : (
                       <div className="hidden md:block h-full border-l border-gold/5 ml-6" />
                     )}
                   </div>
-
-                  {/* Custom Guest Count - Appears if 10+ selected */}
-                  {attending === "yes" && guestSelection === "10+" && (
-                    <div className="md:col-span-2">
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        className="flex flex-col gap-2 mt-2"
-                      >
-                         <label
-                          htmlFor="rsvp-custom-guests"
-                          className="font-serif text-[11px] md:text-xs font-bold text-burgundy tracking-widest uppercase opacity-80"
-                        >
-                          Please specify total guest count
-                        </label>
-                        <input
-                          id="rsvp-custom-guests"
-                          name="custom_guests"
-                          type="number"
-                          min="11"
-                          placeholder="e.g. 12"
-                          required
-                          className="bg-white border border-gold/40 rounded-sm px-4 py-2.5 font-serif text-base text-dark-mid outline-none focus:border-gold focus:ring-4 focus:ring-gold/5 transition-all duration-500 shadow-sm"
-                        />
-                      </motion.div>
-                    </div>
-                  )}
 
                   {/* Attendance Choice - Full Width */}
                   <div className="flex flex-col gap-1.5 md:gap-2.5 md:col-span-2">
