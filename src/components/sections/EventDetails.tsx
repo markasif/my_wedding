@@ -15,7 +15,6 @@ interface EventItem {
   address: string;
   mapLink: string;
   icon: string;
-  phaseLabel: string;
 }
 
 const events: EventItem[] = [
@@ -27,7 +26,6 @@ const events: EventItem[] = [
     address: "Pathumoochi, Vengara, Kerala",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Zubaida+Park+Auditorium+Pathumoochi+Vengara+Kerala",
     icon: "🕌",
-    phaseLabel: "The Ceremonies",
   },
   {
     type: "Night Program",
@@ -37,7 +35,6 @@ const events: EventItem[] = [
     address: "Aliparambil House, Kuttaloor, Vengara",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Mohammed+Aliparambil+House&query_place_id=ChIJzacREABLpqMDUzwuSA50-S4",
     icon: "🌙",
-    phaseLabel: "The Ceremonies",
   },
   {
     type: "Marriage Ceremony",
@@ -47,7 +44,6 @@ const events: EventItem[] = [
     address: "Pathumoochi, Vengara, Kerala",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Zubaida+Park+Auditorium+Pathumoochi+Vengara+Kerala",
     icon: "💍",
-    phaseLabel: "The Wedding",
   },
 ];
 
@@ -107,15 +103,7 @@ export function EventDetails() {
                 <div className="hidden md:block absolute inset-3 border border-gold/10 rounded-sm pointer-events-none" />
                 <div className="hidden md:block absolute inset-4 border-[0.5px] border-gold/5 rounded-sm pointer-events-none" />
                 
-                {/* ── Phase Marker (Seal Design) ── */}
-                <div className="mb-4 md:mb-6 relative flex flex-col items-center">
-                   <div className="absolute top-1/2 -translate-y-1/2 w-full h-px bg-gold/10 hidden md:block" />
-                   <div className="relative z-10 bg-white/80 royal-glass px-4 py-1 rounded-full border border-gold/30 shadow-sm">
-                      <span className="font-script text-base md:text-lg text-gold shimmer-gold block leading-none">
-                        {ev.phaseLabel}
-                      </span>
-                   </div>
-                </div>
+
 
                 {/* Event Type */}
                 <h3 className="font-serif text-xl md:text-2xl font-bold text-burgundy mb-2 md:mb-4 tracking-tight group-hover:gold-gradient-text transition-all duration-500">
